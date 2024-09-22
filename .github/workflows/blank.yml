@@ -10,7 +10,10 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-
+      - name: Setup SSH Key
+        run: |
+          echo "$DEPLOY_KEY" > deploy_key
+          chmod 600 deploy_key
       - name: Copy index.html to server
         env:
           DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}  # SSH anahtarını gizli değişken olarak tanımla
