@@ -26,6 +26,7 @@ jobs:
       - name: Test SSH Connection
         run: |
           ssh -o StrictHostKeyChecking=no -i deploy_key $USERNAME@$SERVER_IP "echo 'SSH connection successful!'"
+          ssh -o StrictHostKeyChecking=no -i deploy_key $USERNAME@$SERVER_IP "echo 'SSH connection successful!'"
 
       - name: Copy index.html to server
         env:
