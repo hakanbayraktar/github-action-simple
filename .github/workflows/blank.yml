@@ -14,11 +14,17 @@ jobs:
 
       - name: Setup SSH Key
         run: |
-          echo "$DEPLOY_KEY" > deploy_key
+          echo "${{ secrets.DEPLOY_KEY }}" > deploy_key
           chmod 600 deploy_key
 
       - name: Check SSH Key
-        run: cat deploy_key
+        run: |
+          cat deploy_key
+          echo "SSH key loaded successfully."
+
+      - name: Test SSH Connection
+        run: |
+          ssh -o StrictHostKeyChecking=no -i deploy_key $USERNAME@$SERVER_IP "echo 'SSH connection successful!'"
 
       - name: Copy index.html to server
         env:
