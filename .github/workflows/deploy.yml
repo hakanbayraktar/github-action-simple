@@ -22,12 +22,11 @@ jobs:
         run: |
           cat deploy_key
           echo "SSH key loaded successfully."
+
       - name: Copy index.html to server
         env:
           SERVER_IP: ${{ secrets.SERVER_IP }}  # Sunucu IP adresi
           USERNAME: ${{ secrets.USERNAME }}  # SSH kullanıcı adı
         run: |
-          ssh -o StrictHostKeyChecking=no -i deploy_key $USERNAME@$SERVER_IP "echo 'SSH connection successful!'"
-          ssh -o StrictHostKeyChecking=no -i deploy_key $USERNAME@$SERVER_IP "echo 'SSH connection successful!'"
           echo "Deploying index.html to server..."
           rsync -avz -e "ssh -o StrictHostKeyChecking=no -i deploy_key" index.html $USERNAME@$SERVER_IP:/var/www/html/
