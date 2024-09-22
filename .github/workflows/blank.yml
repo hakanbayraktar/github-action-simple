@@ -4,21 +4,26 @@ on:
   push:
     branches:
       - main
+
 jobs:
   deploy:
     runs-on: ubuntu-latest  
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+
       - name: Setup SSH Key
         run: |
           echo "$DEPLOY_KEY" > deploy_key
           chmod 600 deploy_key
+
+      - name: Check SSH Key
+        run: cat deploy_key
+
       - name: Copy index.html to server
         env:
-          DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}  # SSH anahtarını gizli değişken olarak tanımla
           SERVER_IP: ${{ secrets.SERVER_IP }}  # Sunucu IP adresi
           USERNAME: ${{ secrets.USERNAME }}  # SSH kullanıcı adı
         run: |
           echo "Deploying index.html to server..."
-          rsync -avz -e "ssh -o StrictHostKeyChecking=no -i $DEPLOY_KEY" index.html $USERNAME@$SERVER_IP:/var/www/html
+          rsync -avz -e "ssh -o StrictHostKeyChecking=no -i deploy_key" index.html $USERNAME@$SERVER_IP:/var/www/html/
