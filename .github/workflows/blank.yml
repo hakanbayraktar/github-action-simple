@@ -18,4 +18,4 @@ jobs:
           USERNAME: ${{ secrets.USERNAME }}  # SSH kullanıcı adı
         run: |
           echo "Deploying index.html to server..."
-          rsync -avz -e "ssh -o StrictHostKeyChecking=no -i $DEPLOY_KEY" index.html $USERNAME@$SERVER_IP:/usr/share/nginx/html
+          rsync -avz -e "ssh -o StrictHostKeyChecking=no -i $DEPLOY_KEY" index.html $USERNAME@$SERVER_IP:/var/www/html
