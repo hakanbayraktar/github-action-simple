@@ -1,3 +1,4 @@
+deneme
 # GitHub Action ile Basit Apache Sunucuya Deploy İşlemi
 Bu projede, GitHub Action kullanarak bir Ubuntu sunucuya Apache Web Sunucusu kurulumu ve ardından index.html dosyasını deploy ediyoruz. Projeye eklediğimiz her değişiklik, GitHub Actions aracılığıyla otomatik olarak sunucuda dağıtılır.
 
